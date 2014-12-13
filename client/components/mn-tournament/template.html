@@ -1,0 +1,32 @@
+<h1 ng-bind="vm.name()"></h1>
+
+<div class="well">
+  <form id="newPlayerForm" novalidate>
+      <div class="row">
+        <div class="col-xs-6">
+          <input
+            ng-model="vm.playerName"
+            id="playerName"
+            type="text"
+            placeholder="Player name"
+            class="form-control" required/>
+        </div>
+        <div class="col-xs-6">
+          <input
+            type="submit"
+            ng-click="vm.addPlayer(vm.playerName)"
+            ng-disabled="newPlayerForm.$invalid"
+            class="btn btn-success"/>
+        </div>
+        <!--<label for="playerName">Player Name</label>-->
+      </div>
+  </form>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div ng-repeat="tier in vm.tiers()">
+      <mn-tier mn-model="tier"></mn-tier>
+    </div>
+  </div>
+</div>
