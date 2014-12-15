@@ -24,17 +24,18 @@
   <div class="list-group">
     <h2>
       Tournaments
-      <span ng-bind="vm.tournaments().length"></span>
+      <span ng-bind="vm.tournaments().length" class="badge"></span>
     </h2>
 
     <a ng-repeat="tournament in vm.tournaments()" ui-sref="tournamentDetail({id: tournament.$id})" class="list-group-item" href="">
-      <span class="row">
-        <span class="col-xs-6">
-          <span ng-bind="tournament.name"></span>
-        </span>
-        <span class="col-xs-6">
+      <span class="h4 row">
+        <span class="col-xs-6 col-md-4">
           <span ng-bind="vm.dateTime(tournament.startDate)"></span>
         </span>
+        <span class="col-xs-6 col-md-8">
+          <span ng-bind="tournament.name"></span>
+        </span>
+
       </span>
     </a>
   </div>
