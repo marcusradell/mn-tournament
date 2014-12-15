@@ -1,0 +1,30 @@
+<div>
+  <h2>Create tournament</h2>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <form name="tournamentForm" novalidate>
+        <div class="form-group">
+          <input ng-model="vm.name" type="text" id="name" name="name" class="form-control" placeholder="Name"/>
+        </div>
+        <div class="form-group">
+          <input ng-model="vm.startDate" type="datetime-local" id="startDate" name="starDate" class="form-control"
+                 placeholder="Start date"/>
+        </div>
+        <div class="form-group">
+          <input ng-click="vm.createTournament(vm.name, vm.startDate)" type="submit" value="Create"
+                 class="btn btn-success"/>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <h2>
+      Tournaments
+      <span ng-bind="vm.tournaments().length"></span>
+    </h2>
+
+    <mn-tournament ng-repeat="tournament in vm.tournaments()" mn-model="tournament"></mn-tournament>
+  </div>
+</div>

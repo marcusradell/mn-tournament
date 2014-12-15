@@ -1,0 +1,68 @@
+<div>
+  <div class="page-header">
+    <h1>Tournament pool</h1>
+  </div>
+
+  <div class="well">
+    <h3>Close registration</h3>
+
+    <div>
+      <p>Any players that have not checked in will be removed from the tournament.</p>
+      <button ng-click="vm.closeRegistration()" class="btn btn-warning">Close registration</button>
+    </div>
+  </div>
+
+  <div class="well">
+    <h3>Register new player</h3>
+
+    <form id="newPlayerForm" novalidate>
+      <div class="row">
+        <div class="col-xs-6">
+          <input
+            ng-model="vm.playerName"
+            id="playerName"
+            type="text"
+            placeholder="Player name"
+            class="form-control" required/>
+        </div>
+        <div class="col-xs-6">
+          <input
+            type="submit"
+            ng-click="vm.registerPlayer(vm.playerName)"
+            ng-disabled="newPlayerForm.$invalid"
+            class="btn btn-success"/>
+        </div>
+        <!--<label for="playerName">Player Name</label>-->
+      </div>
+    </form>
+  </div>
+
+  <div class="well">
+    <h3>
+      Registered players
+      <span ng-bind="vm.players().length" class="badge"></span>
+    </h3>
+
+    <div ng-repeat="player in vm.players()">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-xs-6">
+              <mn-player mn-model="player"></mn-player>
+            </div>
+            <div class="col-xs-6">
+              <div class="row">
+                <div class="col-xs-6">
+                  <button ng-click="vm.checkInPlayer(player.id())" class="btn btn-success">Check in</button>
+                </div>
+                <div class="col-xs-6 text-right">
+                  <button ng-click="vm.removePlayer(player.id())" class="btn btn-danger">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

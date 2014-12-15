@@ -4,7 +4,7 @@ var moment = require('moment')
 var fn = function () {
   var vm = this
 
-  var model = new Model(moment().valueOf())
+  var model = new Model(moment().format('YYYY-MM-DD hh:mm'))
 
   var addPlayer = function(playerName) {
     try {

@@ -1,6 +1,5 @@
-var fn = function ($firebaseAuth, mnFirebaseRootRef) {
-  var vm = this
-  var ref = mnFirebaseRootRef.rootRef()
+module.exports = function ($firebaseAuth, mnFirebaseConstants) {
+  var ref = mnFirebaseConstants.ROOT_REF
   var authObj = $firebaseAuth(ref)
 
   var logIn = function (email, password) {
@@ -10,8 +9,8 @@ var fn = function ($firebaseAuth, mnFirebaseRootRef) {
       password: password
     }).then(function (authData) {
         _authData = authData
-      alert(authData)
-    },
+        alert(authData)
+      },
       function (error) {
         alert(error)
       })
@@ -20,6 +19,7 @@ var fn = function ($firebaseAuth, mnFirebaseRootRef) {
   var logOut = function () {
     authObj.$unauth()
     // TODO: This should be fixed to update live, not changed manually.
+    // Can the authObj be used instead? Or is the _authData field updated by firebase automatically?
     _authData = false
   }
 
@@ -28,14 +28,9 @@ var fn = function ($firebaseAuth, mnFirebaseRootRef) {
     return _authData
   }
 
-  vm.logIn = logIn
-  vm.logOut = logOut
-  vm.authData = authData
-}
-
-module.exports = function (parentName) {
   return {
-    name: parentName + 'Controller',
-    fn: fn
+    logIn: logIn,
+    logOut: logOut,
+    authData: authData
   }
 }

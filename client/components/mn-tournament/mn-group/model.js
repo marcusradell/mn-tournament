@@ -1,5 +1,5 @@
 var _ = require('lodash')
-var MnPlayer = require('../mn-player/model')
+var MnPlayer = require('../../mn-player/model')
 
 var Model = function(id, maxPlayers) {
   if(!(this instanceof Model)) {

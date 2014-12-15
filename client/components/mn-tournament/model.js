@@ -5,7 +5,7 @@ var currentTierId = 1
 
 var Model = function(id, name) {
   if(!(this instanceof Model)) {
-    return new MnTournament(id, name)
+    return new Model(id, name)
   }
 
   this._id = id

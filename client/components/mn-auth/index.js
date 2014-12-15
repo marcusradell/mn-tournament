@@ -1,20 +1,21 @@
 var fs = require('fs')
 
-var moduleName = 'auth'
-var template = fs.readFileSync(__dirname + '/template.html')
-var controller = require('./controller')
+var moduleName = 'mnAuth'
+var controllerName = moduleName + 'Controller'
 
 var directiveFn = function () {
   return {
-    restrict: 'AE',
-    controller: controller.name,
+    controller: controllerName,
     controllerAs: 'vm',
     bindToController: true,
-    template: template,
+    template: fs.readFileSync(__dirname + '/template.html'),
     scope: {}
   }
 }
 
-module.exports = angular.module(moduleName, [])
-  .controller(controller.name, controller.fn)
+var dependencies = [require('../mn-firebase').name]
+
+module.exports = angular.module(moduleName, dependencies)
+  .factory(moduleName + 'Repository', require('./service'))
+  .controller(controllerName, require('./controller'))
   .directive(moduleName, directiveFn)

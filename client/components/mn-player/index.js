@@ -1,8 +1,9 @@
 var fs = require('fs')
 
-var moduleName = 'mnGroup'
+var moduleName = 'mnPlayer'
 var template = fs.readFileSync(__dirname + '/template.html')
 var controller = require('./controller')(moduleName)
+var playersService = require('./mn-players-service')
 
 var directiveFn = function () {
   return {
@@ -16,8 +17,7 @@ var directiveFn = function () {
   }
 }
 
-var dependencies = [require('../../mn-player').name]
-
-module.exports = module.exports = angular.module(moduleName, dependencies)
+module.exports = angular.module(moduleName, [])
   .controller(controller.name, controller.fn)
   .directive(moduleName, directiveFn)
+  .factory(playersService.name, playersService.fn)

@@ -12,6 +12,7 @@ var Model = function(name) {
   // TODO: Fix better ID solution. GUID?
   this._id = name
   this._name = name
+  this._isCheckedIn = false
 }
 
 Model.prototype.name = function (value) {
@@ -24,6 +25,14 @@ Model.prototype.name = function (value) {
 
 Model.prototype.id = function () {
   return this._id
+}
+
+Model.prototype.isCheckedIn = function (value) {
+  if(!arguments.length) {
+    return this._isCheckedIn
+  }
+
+  this._isCheckedIn = value
 }
 
 module.exports = Model

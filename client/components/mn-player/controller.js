@@ -5,7 +5,12 @@ var fn = function () {
     return this.mnModel.name()
   }
 
+  var isCheckedIn = function () {
+    return this.mnModel.isCheckedIn()
+  }
+
   vm.name = name
+  vm.isCheckedIn = isCheckedIn
 }
 
 module.exports = function (parentName) {
