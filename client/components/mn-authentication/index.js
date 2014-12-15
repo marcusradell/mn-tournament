@@ -1,6 +1,6 @@
 var fs = require('fs')
 
-var moduleName = 'mnAuth'
+var moduleName = 'mnAuthentication'
 var controllerName = moduleName + 'Controller'
 
 var directiveFn = function () {
@@ -16,6 +16,6 @@ var directiveFn = function () {
 var dependencies = [require('../mn-firebase').name]
 
 module.exports = angular.module(moduleName, dependencies)
-  .factory(moduleName + 'Repository', require('./service'))
+  .factory(moduleName + 'Repository', require('./repository'))
   .controller(controllerName, require('./controller'))
   .directive(moduleName, directiveFn)

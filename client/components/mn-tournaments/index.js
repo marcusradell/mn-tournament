@@ -2,12 +2,11 @@ var fs = require('fs')
 
 var moduleName = 'mnTournaments'
 var template = fs.readFileSync(__dirname + '/template.html')
-var controller = require('./controller')(moduleName)
-var repository = require('./repository')(moduleName)
+var controllerName = moduleName + 'Controller'
 
 var directiveFn = function () {
   return {
-    controller: controller.name,
+    controller: controllerName,
     controllerAs: 'vm',
     bindToController: true,
     template: template,
@@ -15,9 +14,12 @@ var directiveFn = function () {
   }
 }
 
-var dependencies = [require('../mn-firebase').name]
+var dependencies = [
+  require('../mn-firebase').name,
+  require('../mn-authentication').name
+]
 
 module.exports = module.exports = angular.module(moduleName, dependencies)
-  .controller(controller.name, controller.fn)
+  .controller(controllerName, require('./controller'))
   .directive(moduleName, directiveFn)
-  .factory(repository.name, repository.fn)
+  .factory(moduleName + 'Repository', require('./repository'))

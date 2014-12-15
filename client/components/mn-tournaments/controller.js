@@ -1,23 +1,26 @@
 var moment = require('moment')
 
-var fn = function (mnTournamentsService) {
+module.exports = function (mnTournamentsRepository, mnAuthenticationRepository) {
   var vm = this
 
   var createTournament = function (name, startDate) {
-    mnTournamentsService.createTournament(name, moment(startDate).valueOf())
+    mnTournamentsRepository.createTournament(name, moment(startDate).valueOf())
   }
 
   var tournaments = function () {
-    return mnTournamentsService.tournaments()
+    return mnTournamentsRepository.tournaments()
+  }
+
+  var isAuthenticated = function () {
+    return mnAuthenticationRepository.isAuthenticated()
+  }
+
+  var dateTime = function (startDate) {
+    return moment(startDate).format('YYYY-MM-DD hh:mm')
   }
 
   vm.createTournament = createTournament
   vm.tournaments = tournaments
-}
-
-module.exports = function (parentName) {
-  return {
-    name: parentName + 'Controller',
-    fn: fn
-  }
+  vm.isAuthenticated = isAuthenticated
+  vm.dateTime = dateTime
 }

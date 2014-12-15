@@ -1,30 +1,42 @@
 <div>
-  <h2>Create tournament</h2>
+  <div ng-if="vm.isAuthenticated()">
+    <h2>Create tournament</h2>
 
-  <div class="row">
-    <div class="col-xs-6">
-      <form name="tournamentForm" novalidate>
-        <div class="form-group">
-          <input ng-model="vm.name" type="text" id="name" name="name" class="form-control" placeholder="Name"/>
-        </div>
-        <div class="form-group">
-          <input ng-model="vm.startDate" type="datetime-local" id="startDate" name="starDate" class="form-control"
-                 placeholder="Start date"/>
-        </div>
-        <div class="form-group">
-          <input ng-click="vm.createTournament(vm.name, vm.startDate)" type="submit" value="Create"
-                 class="btn btn-success"/>
-        </div>
-      </form>
+    <div class="row">
+      <div class="col-xs-6">
+        <form name="tournamentForm" novalidate>
+          <div class="form-group">
+            <input ng-model="vm.name" type="text" id="name" name="name" class="form-control" placeholder="Name"/>
+          </div>
+          <div class="form-group">
+            <input ng-model="vm.startDate" type="datetime-local" id="startDate" name="starDate" class="form-control"
+                   placeholder="Start date"/>
+          </div>
+          <div class="form-group">
+            <input ng-click="vm.createTournament(vm.name, vm.startDate)" type="submit" value="Create"
+                   class="btn btn-success"/>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
-  <div>
+  <div class="list-group">
     <h2>
       Tournaments
       <span ng-bind="vm.tournaments().length"></span>
     </h2>
 
-    <mn-tournament ng-repeat="tournament in vm.tournaments()" mn-model="tournament"></mn-tournament>
+    <a ng-repeat="tournament in vm.tournaments()" ui-sref="tournamentDetail({id: tournament.$id})" class="list-group-item" href="">
+      <span class="row">
+        <span class="col-xs-6">
+          <span ng-bind="tournament.name"></span>
+        </span>
+        <span class="col-xs-6">
+          <span ng-bind="vm.dateTime(tournament.startDate)"></span>
+        </span>
+      </span>
+    </a>
   </div>
+
 </div>
