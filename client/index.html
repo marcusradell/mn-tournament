@@ -11,22 +11,22 @@
 </head>
 <body>
 <div class="container">
-  <div class="well">
-    <h2>MN-Tournament menu</h2>
-
-    <div class="list-group">
-      <a href="" ui-sref="tournaments" ui-sref-active="active" class="list-group-item">
+    <ul class="nav nav-pills">
+      <li ui-sref-active="active">
+      <a href="" ui-sref="tournaments"  class="list-group-item">
         <span class="h4">
           <i class="fa fa-trophy"></i> Tournaments
         </span>
       </a>
-      <a href="" ui-sref="authentications" ui-sref-active="active" class="list-group-item">
+      </li>
+      <li ui-sref-active="active">
+      <a href="" ui-sref="authentications" class="list-group-item">
         <span class="h4">
           <i class="fa fa-key"></i> Admin login
         </span>
       </a>
-    </div>
-  </div>
+      </li>
+    </ul>
 
 
   <ui-view></ui-view>
