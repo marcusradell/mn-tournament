@@ -11,14 +11,18 @@ var directiveFn = function () {
     bindToController: true,
     template: template,
     scope: {
-      mnModel: '='
+      mnTournamentId: '='
     }
   }
 }
 
-var dependencies = [require('./mn-tier').name]
+var dependencies = [
+  require('./mn-tier').name,
+  require('./mn-pool').name
+]
 
 module.exports = module.exports = angular.module(moduleName, dependencies)
   .factory(moduleName + 'Repository', require('./repository'))
+  .factory(moduleName + 'States', require('./states'))
   .controller(controllerName, require('./controller'))
   .directive(moduleName, directiveFn)

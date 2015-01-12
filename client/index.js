@@ -8,7 +8,6 @@ angular.module('app', [
   'ui.router',
   require('./components/mn-authentication').name,
   require('./components/mn-tournament').name,
-  require('./components/mn-tournaments').name,
-  require('./components/mn-pool').name
+  require('./components/mn-tournaments').name
 ])
   .config(require('./config'))

@@ -16,10 +16,10 @@ var directiveFn = function () {
 
 var dependencies = [
   require('../mn-firebase').name,
-  require('../mn-authentication').name
+  require('../mn-authentication').name,
+  require('../mn-tournament').name
 ]
 
 module.exports = module.exports = angular.module(moduleName, dependencies)
   .controller(controllerName, require('./controller'))
   .directive(moduleName, directiveFn)
-  .factory(moduleName + 'Repository', require('./repository'))

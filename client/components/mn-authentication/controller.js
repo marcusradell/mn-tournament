@@ -1,7 +1,5 @@
-module.exports = function ($firebaseAuth, mnFirebaseConstants, mnAuthenticationRepository) {
+module.exports = function (mnAuthenticationRepository) {
   var vm = this
-  var ref = mnFirebaseConstants.ROOT_REF
-  var authObj = $firebaseAuth(ref)
 
   var logIn = function (email, password) {
     mnAuthenticationRepository.logIn(email, password)

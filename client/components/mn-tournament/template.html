@@ -1,9 +1,29 @@
-<h1>Tournament <span ng-bind="vm.name()"></span></h1>
+<div>
+  <pre>{{vm.tournament() | json}}</pre>
+</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div ng-repeat="tier in vm.tiers()">
-      <mn-tier mn-model="tier"></mn-tier>
-    </div>
-  </div>
+<div>
+  <strong ng-bind="vm.tournament().name"></strong>
+</div>
+
+<div>
+  <h4>Start date</h4>
+  <span ng-bind="vm.dateTime(vm.tournament().startDate)"></span>
+</div>
+
+<div>
+  <h4>
+    <span ng-if="!vm.hasStartDatePassed(vm.tournament().startDate)">Time until start</span>
+    <span ng-if="vm.hasStartDatePassed(vm.tournament().startDate)">Time since started</span>
+  </h4>
+  <span ng-bind="vm.timeDifferenceFromNow(vm.tournament().startDate)"></span>
+</div>
+
+<div>
+  <h4>Players per group</h4>
+  <span ng-bind="vm.tournament().maxPlayersPerGroup"></span>
+</div>
+
+<div ng-if="vm.tournament().state === vm.tournamentStates().REGISTRATION_OPEN">
+  <mn-pool mn-tournamentId="vm.tournament().$id"></mn-pool>
 </div>

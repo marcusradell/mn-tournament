@@ -1,27 +1,43 @@
-var Model = require('./model')
 var moment = require('moment')
 
-module.exports = function () {
+module.exports = function (mnTournamentRepository, mnTournamentStates) {
   var vm = this
 
-  var addPlayer = function(playerName) {
-    try {
-      vm.mnModel.addPlayer(playerName)
+  var tournament = function () {
+    return mnTournamentRepository.tournamentById(vm.mnTournamentId)
+  }
+
+  var dateTime = function (dateTime) {
+    if(!dateTime) {
+      throw new Error('Argument dateTime was not set.')
     }
-    catch(e) {
-      alert(e)
+
+    return moment(dateTime).format('hh:mm dddd Do MMMM YYYY')
+  }
+
+  var timeDifferenceFromNow = function (dateTime) {
+    if(!dateTime) {
+      throw new Error('Argument dateTime was not set.')
     }
+
+    return moment.duration(moment(dateTime).diff(moment())).humanize();
   }
 
-  var name = function () {
-    return vm.mnModel.name
+  var hasStartDatePassed = function (dateTime) {
+    if(!dateTime) {
+      throw new Error('Argument dateTime was not set.')
+    }
+
+    return moment(dateTime).isBefore(moment())
   }
 
-  var tiers = function () {
-    return vm.mnModel.tiers // TODO:
+  var tournamentStates = function () {
+    return mnTournamentStates
   }
 
-  vm.addPlayer = addPlayer
-  vm.name = name
-  vm.tiers = tiers
+  vm.tournament = tournament
+  vm.dateTime = dateTime
+  vm.timeDifferenceFromNow = timeDifferenceFromNow
+  vm.hasStartDatePassed = hasStartDatePassed
+  vm.tournamentStates = tournamentStates
 }

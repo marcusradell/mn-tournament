@@ -8,7 +8,6 @@ module.exports = function ($firebaseAuth, mnFirebaseConstants) {
       password: password
     }).then(function (authData) {
         _authData = authData
-        alert(authData)
       },
       function (error) {
         alert(error)
