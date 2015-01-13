@@ -26,7 +26,7 @@
 
   <h2>
     Tournaments
-    <span ng-bind="vm.tournaments().length" class="badge"></span>
+    <span ng-bind="vm.tournaments.length" class="badge"></span>
   </h2>
 
   <table class="table table-striped">
@@ -38,7 +38,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="tournament in vm.tournaments()">
+    <tr ng-repeat="tournament in vm.tournaments">
       <td>
         <a ui-sref="tournamentDetail({id: tournament.$id})" href="">
           <span ng-bind="tournament.name"></span>

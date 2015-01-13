@@ -7,10 +7,6 @@ module.exports = function (mnTournamentRepository, mnAuthenticationRepository) {
     mnTournamentRepository.createTournament(name, moment(startDate).valueOf(), playersPerGroup)
   }
 
-  var tournaments = function () {
-    return mnTournamentRepository.tournaments()
-  }
-
   var isAuthenticated = function () {
     return mnAuthenticationRepository.isAuthenticated()
   }
@@ -19,8 +15,16 @@ module.exports = function (mnTournamentRepository, mnAuthenticationRepository) {
     return moment(startDate).format('YYYY-MM-DD hh:mm')
   }
 
+  vm.tournaments = null
   vm.createTournament = createTournament
-  vm.tournaments = tournaments
   vm.isAuthenticated = isAuthenticated
   vm.dateTime = dateTime
+
+  ;(function initialize() {
+    mnTournamentRepository.tournaments().then(function (data) {
+      vm.tournaments = data
+    }, function (data) {
+      alert(data)
+    })
+  }())
 }

@@ -1,52 +1,40 @@
-var Model = require('./repository')
-var moment = require('moment')
+module.exports = function (mnPoolRepository) {
+  debugger;
 
-var fn = function (mnPlayersService) {
   var vm = this
 
-  var model = new Model(moment().format('YYYY-MM-DD hh:mm'))
+  var addPlayer = function(playerName) {
+    mnPoolRepository.addPlayer(vm.pool, playerName).then(function () {
 
-  var registerPlayer = function(playerName) {
-    try {
-      model.registerPlayer(playerName)
-    }
-    catch(e) {
-      alert(e)
-    }
+    }, function (data) {
+      alert(data)
+    })
   }
 
-  var checkInPlayer = function (playerId) {
-    model.checkInPlayer(playerId)
+  var setPlayerCheckInStatus = function (playerName, isCheckedIn) {
+    mnPoolRepository.setPlayerCheckInStatus(vm.pool, playerName, isCheckedIn)
   }
 
-  var removePlayer = function (playerId) {
-    model.removePlayer(playerId)
+  var removePlayer = function (playerName) {
+    mnPoolRepository.removePlayer(vm.pool, playerName)
   }
 
-  var closeRegistration = function () {
-    model.closeRegistration()
+  var removeAllMissingPlayers = function () {
+    mnPoolRepository.removeAllMissingPlayers(vm.pool)
   }
 
-  var name = function () {
-    return model.name()
-  }
-
-  var players = function () {
-    return model.players()
-  }
-
-  vm.registerPlayer = registerPlayer
-  vm.checkInPlayer = checkInPlayer
+  vm.pool = null
+  vm.addPlayer = addPlayer
+  vm.setPlayerCheckInStatus = setPlayerCheckInStatus
   vm.removePlayer = removePlayer
-  vm.closeRegistration = closeRegistration
-  vm.name = name
-  vm.players = players
-}
+  vm.removeAllMissingPlayers = removeAllMissingPlayers
 
-module.exports = function (parentName) {
-  return {
-    name: parentName + 'Controller',
-    fn: fn
-  }
+  ;(function initialize() {
+    mnPoolRepository.getPoolById(vm.mnTournamentId).then(function (data) {
+      vm.pool = data
+    }, function (data) {
+      alert(data)
+    })
+  }())
 }
 

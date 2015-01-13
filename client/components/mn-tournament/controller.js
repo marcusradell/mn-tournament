@@ -3,10 +3,6 @@ var moment = require('moment')
 module.exports = function (mnTournamentRepository, mnTournamentStates) {
   var vm = this
 
-  var tournament = function () {
-    return mnTournamentRepository.tournamentById(vm.mnTournamentId)
-  }
-
   var dateTime = function (dateTime) {
     if(!dateTime) {
       throw new Error('Argument dateTime was not set.')
@@ -35,9 +31,17 @@ module.exports = function (mnTournamentRepository, mnTournamentStates) {
     return mnTournamentStates
   }
 
-  vm.tournament = tournament
+  vm.tournament = null
   vm.dateTime = dateTime
   vm.timeDifferenceFromNow = timeDifferenceFromNow
   vm.hasStartDatePassed = hasStartDatePassed
   vm.tournamentStates = tournamentStates
+
+  ;(function initialize() {
+    mnTournamentRepository.tournamentById(vm.mnTournamentId).then(function (data) {
+      vm.tournament = data
+    }, function (data) {
+      alert(data)
+    })
+  }())
 }

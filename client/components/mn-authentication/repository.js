@@ -1,5 +1,7 @@
+var Firebase = require('firebase')
+
 module.exports = function ($firebaseAuth, mnFirebaseConstants) {
-  var ref = mnFirebaseConstants.ROOT_REF
+  var ref = new Firebase(mnFirebaseConstants.ROOT_REF)
   var authObj = $firebaseAuth(ref)
 
   var logIn = function (email, password) {

@@ -1,21 +1,29 @@
-module.exports = function ($firebase, mnFirebaseConstants, mnTournamentStates) {
-  var sync = $firebase(mnFirebaseConstants.ROOT_REF.child('tournaments'))
+module.exports = function ($firebase, mnFirebaseConstants, mnTournamentStates, mnPoolRepository) {
+  var tournamentsSync = $firebase(new Firebase(mnFirebaseConstants.ROOT_REF).child(mnFirebaseConstants.TOURNAMENTS))
 
   var createTournament = function (name, startDate, maxPlayersPerGroup) {
-    sync.$push({
+    tournamentsSync.$push({
       name: name,
       startDate: startDate,
       maxPlayersPerGroup: maxPlayersPerGroup || 2,
       state: mnTournamentStates.REGISTRATION_OPEN
+    }).then(function (ref) {
+      return mnPoolRepository.createPool(ref.key())
+    }, function (data) {
+      alert(data)
+    }).then(function (ref) {
+
+    }, function (data) {
+      alert(data)
     })
   }
 
   var tournaments = function () {
-    return sync.$asArray()
+    return tournamentsSync.$asArray().$loaded()
   }
 
   var tournamentById = function (id) {
-    var tournament = tournaments().$getRecord(id)
+    var tournament = $firebase(tournamentsSync.$ref().child(id)).$asObject().$loaded()
     return tournament
   }
 

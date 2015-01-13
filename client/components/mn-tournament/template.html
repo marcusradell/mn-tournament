@@ -1,29 +1,29 @@
-<div>
-  <pre>{{vm.tournament() | json}}</pre>
-</div>
+<div ng-if="vm.tournament">
+  <div class="well">
+  <div>
+    <h2 class="text-primary" ng-bind="vm.tournament.name"></h2>
+  </div>
 
-<div>
-  <strong ng-bind="vm.tournament().name"></strong>
-</div>
+  <div>
+    <h4>Start date</h4>
+    <strong ng-bind="vm.dateTime(vm.tournament.startDate)"></strong>
+  </div>
 
-<div>
-  <h4>Start date</h4>
-  <span ng-bind="vm.dateTime(vm.tournament().startDate)"></span>
-</div>
+  <div>
+    <h4>
+      <span ng-if="!vm.hasStartDatePassed(vm.tournament.startDate)">Time until start</span>
+      <span ng-if="vm.hasStartDatePassed(vm.tournament.startDate)">Time since start</span>
+    </h4>
+    <strong ng-bind="vm.timeDifferenceFromNow(vm.tournament.startDate)"></strong>
+  </div>
 
-<div>
-  <h4>
-    <span ng-if="!vm.hasStartDatePassed(vm.tournament().startDate)">Time until start</span>
-    <span ng-if="vm.hasStartDatePassed(vm.tournament().startDate)">Time since started</span>
-  </h4>
-  <span ng-bind="vm.timeDifferenceFromNow(vm.tournament().startDate)"></span>
-</div>
+  <div>
+    <h4>Players per group</h4>
+    <strong ng-bind="vm.tournament.maxPlayersPerGroup"></strong>
+  </div>
+  </div>
 
-<div>
-  <h4>Players per group</h4>
-  <span ng-bind="vm.tournament().maxPlayersPerGroup"></span>
-</div>
-
-<div ng-if="vm.tournament().state === vm.tournamentStates().REGISTRATION_OPEN">
-  <mn-pool mn-tournamentId="vm.tournament().$id"></mn-pool>
+  <div>
+    <mn-pool mn-tournament-id="vm.tournament.$id"></mn-pool>
+  </div>
 </div>
