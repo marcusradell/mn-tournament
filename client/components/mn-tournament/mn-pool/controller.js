@@ -1,6 +1,4 @@
 module.exports = function (mnPoolRepository) {
-  debugger;
-
   var vm = this
 
   var addPlayer = function(playerName) {
