@@ -59,7 +59,7 @@
     <h4>Tier <strong ng-bind="group.tier"></strong></h4>
 
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-12 col-md-6">
         <h4>Players</h4>
         <ul class="list-group">
           <li
@@ -69,17 +69,34 @@
           </li>
         </ul>
       </div>
-      <div class="col-xs-6">
+      <div class="col-xs-12 col-md-6">
         <h4>Games</h4>
-        <ul class="list-group">
-          <li
-            ng-repeat="game in group.games"
-            class="list-group-item">
-            <strong ng-bind="game.redPlayer"></strong>
-            vs
-            <strong ng-bind="game.bluePlayer"></strong>
-          </li>
-        </ul>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Red player</th>
+            <th>Blue player</th>
+            <th>Red score</th>
+            <th>Blue score</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="game in group.games">
+            <td>
+              <span ng-bind="game.redPlayer"></span>
+            </td>
+            <td>
+              <span ng-bind="game.bluePlayer"></span>
+            </td>
+            <td>
+              <span ng-bind="game.redScore"></span>
+            </td>
+            <td>
+              <span ng-bind="game.blueScore"></span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

@@ -34,7 +34,8 @@ module.exports = function ($firebase, mnFirebaseConstants, mnPoolRepository) {
         games.push({
           redPlayer: playerNames[i],
           bluePlayer: playerNames[j],
-          winner: false
+          redScore: '-',
+          blueScore: '-'
         })
       }
     }
