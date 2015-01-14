@@ -44,10 +44,17 @@ module.exports = function (mnGroupsRepository, mnPoolRepository) {
     return player.isCheckedIn && !player.isAssignedToGroup
   }
 
+  var availablePlayersInPool = function (pool) {
+    return _.where(pool, function (player) {
+      return isPlayerAvailable(player)
+    })
+  }
+
   vm.groups = null
   vm.pool = null
   vm.selectedPlayerNames = []
   vm.isPlayerAvailable = isPlayerAvailable
+  vm.availablePlayersInPool = availablePlayersInPool
   vm.selectPlayerName = selectPlayerName
   vm.unselectPlayerName = unselectPlayerName
   vm.createGroup = createGroup

@@ -30,7 +30,7 @@ module.exports = function ($firebase, mnFirebaseConstants, mnPoolRepository) {
     var games =  []
 
     for(var i = 0; i < playerNames.length - 1; i++) {
-      for(var j = i + 1; j < playerNames; j++) {
+      for(var j = i + 1; j < playerNames.length; j++) {
         games.push({
           redPlayer: playerNames[i],
           bluePlayer: playerNames[j],
@@ -42,12 +42,18 @@ module.exports = function ($firebase, mnFirebaseConstants, mnPoolRepository) {
     return games
   }
 
+  // TODO: Implement.
+  var removeGroup = function (groupsArray, groupId) {
+    // mnPoolRepository.setPlayersIsAssignedToGroup(poolArray, playerNames, true)
+  }
+
   var getGroupsArrayByTournamentId = function (tournamentId) {
     return $firebase(groupsSync.$ref().child(tournamentId)).$asArray().$loaded()
   }
 
   return {
     createGroup: createGroup,
+    removeGroup: removeGroup,
     createGroupsArray: createGroupsArray,
     getGroupsArrayByTournamentId: getGroupsArrayByTournamentId
   }

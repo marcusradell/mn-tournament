@@ -1,6 +1,6 @@
 var moment = require('moment')
 
-module.exports = function (mnTournamentRepository, mnTournamentStates) {
+module.exports = function (mnTournamentsRepository, mnTournamentsStates) {
   var vm = this
 
   var dateTime = function (dateTime) {
@@ -28,7 +28,7 @@ module.exports = function (mnTournamentRepository, mnTournamentStates) {
   }
 
   var tournamentStates = function () {
-    return mnTournamentStates
+    return mnTournamentsStates
   }
 
   vm.tournament = null
@@ -38,7 +38,7 @@ module.exports = function (mnTournamentRepository, mnTournamentStates) {
   vm.tournamentStates = tournamentStates
 
   ;(function initialize() {
-    mnTournamentRepository.tournamentById(vm.mnTournamentId).then(function (data) {
+    mnTournamentsRepository.tournamentById(vm.mnTournamentId).then(function (data) {
       vm.tournament = data
     }, function (data) {
       alert(data)

@@ -1,8 +1,8 @@
 var fs = require('fs')
 
-var moduleName = 'mnTournaments'
-var template = fs.readFileSync(__dirname + '/template.html')
+var moduleName = 'mnGroup'
 var controllerName = moduleName + 'Controller'
+var template = fs.readFileSync(__dirname + '/template.html')
 
 var directiveFn = function () {
   return {
@@ -10,16 +10,15 @@ var directiveFn = function () {
     controllerAs: 'vm',
     bindToController: true,
     template: template,
-    scope: {}
+    scope: {
+      mnTournamentId: '=',
+      mnGroupId: '='
+    }
   }
 }
 
-var dependencies = [
-  require('./mn-tournament').name
-]
+var dependencies = [require('../mn-pool').name]
 
 module.exports = angular.module(moduleName, dependencies)
   .controller(controllerName, require('./controller'))
-  .factory(moduleName + 'Repository', require('./repository'))
-  .factory(moduleName + 'States', require('./states'))
   .directive(moduleName, directiveFn)
