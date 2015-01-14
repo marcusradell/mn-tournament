@@ -1,4 +1,5 @@
 var Firebase = require('firebase')
+var _ = require('lodash')
 
 module.exports = function ($firebase, $q, mnFirebaseConstants) {
   var poolsSync = $firebase(new Firebase(mnFirebaseConstants.ROOT_REF).child(mnFirebaseConstants.POOLS))
@@ -12,13 +13,27 @@ module.exports = function ($firebase, $q, mnFirebaseConstants) {
     }
 
     return poolArray.$inst().$set(playerName, {
-      checkedIn: false
+      isCheckedIn: false,
+      isAssignedToGroup: false
     })
   }
 
-  var setPlayerCheckInStatus = function (poolArray, playerName, isCheckedIn) {
+  var setPlayerIsCheckedIn = function (poolArray, playerName, isCheckedIn) {
     return poolArray.$inst().$update(playerName, {
-      checkedIn: isCheckedIn
+      isCheckedIn: isCheckedIn
+    })
+  }
+
+  // TODO: Solve promise solution in the for-loop.
+  var setPlayersIsAssignedToGroup = function (poolArray, playerNames, isAssignedToGroup) {
+    for(var i = 0; i < playerNames.length; i++) {
+      setPlayerIsAssignedToGroup(poolArray, playerNames[i], isAssignedToGroup)
+    }
+  }
+
+  var setPlayerIsAssignedToGroup = function (poolArray, playerName, isAssignedToGroup) {
+    return poolArray.$inst().$update(playerName, {
+      isAssignedToGroup: isAssignedToGroup
     })
   }
 
@@ -28,10 +43,6 @@ module.exports = function ($firebase, $q, mnFirebaseConstants) {
 
   var getPoolById = function (poolId) {
     return $firebase(poolsSync.$ref().child(poolId)).$asArray().$loaded()
-  }
-
-  var removeAllMissingPlayers = function (poolArray) {
-    throw new Error('TODO: Implement.')
   }
 
   var isNameUnique = function (poolArray, playerName) {
@@ -46,8 +57,9 @@ module.exports = function ($firebase, $q, mnFirebaseConstants) {
     getPoolById: getPoolById,
     createPool: createPool,
     addPlayer: addPlayer,
-    setPlayerCheckInStatus: setPlayerCheckInStatus,
-    removePlayer: removePlayer,
-    removeAllMissingPlayers: removeAllMissingPlayers
+    setPlayerIsCheckedIn: setPlayerIsCheckedIn,
+    setPlayersIsAssignedToGroup: setPlayersIsAssignedToGroup,
+    setPlayerIsAssignedToGroup: setPlayerIsAssignedToGroup,
+    removePlayer: removePlayer
   }
 }

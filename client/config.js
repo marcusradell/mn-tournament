@@ -18,4 +18,10 @@ module.exports = function ($stateProvider, $urlRouterProvider) {
       url: '/authentications',
       template: fs.readFileSync(__dirname + '/ui-views/authentications/template.html')
     })
+    .state('groups', {
+      url: '/groups/:id',
+      template: fs.readFileSync(__dirname + '/ui-views/groups/template.html'),
+      controller: require('./ui-views/groups/controller'),
+      controllerAs: 'vm'
+    })
 }

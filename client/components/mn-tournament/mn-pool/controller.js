@@ -3,14 +3,14 @@ module.exports = function (mnPoolRepository) {
 
   var addPlayer = function(playerName) {
     mnPoolRepository.addPlayer(vm.pool, playerName).then(function () {
-
+      // success
     }, function (data) {
       alert(data)
     })
   }
 
-  var setPlayerCheckInStatus = function (playerName, isCheckedIn) {
-    mnPoolRepository.setPlayerCheckInStatus(vm.pool, playerName, isCheckedIn)
+  var setPlayerIsCheckedIn = function (playerName, isCheckedIn) {
+    mnPoolRepository.setPlayerIsCheckedIn(vm.pool, playerName, isCheckedIn)
   }
 
   var removePlayer = function (playerName) {
@@ -23,7 +23,7 @@ module.exports = function (mnPoolRepository) {
 
   vm.pool = null
   vm.addPlayer = addPlayer
-  vm.setPlayerCheckInStatus = setPlayerCheckInStatus
+  vm.setPlayerIsCheckedIn = setPlayerIsCheckedIn
   vm.removePlayer = removePlayer
   vm.removeAllMissingPlayers = removeAllMissingPlayers
 
@@ -35,4 +35,3 @@ module.exports = function (mnPoolRepository) {
     })
   }())
 }
-

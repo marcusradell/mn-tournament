@@ -1,26 +1,32 @@
 <div ng-if="vm.tournament">
   <div class="well">
-  <div>
-    <h2 class="text-primary" ng-bind="vm.tournament.name"></h2>
-  </div>
+    <div>
+      <h2 class="text-primary" ng-bind="vm.tournament.name"></h2>
+    </div>
 
-  <div>
-    <h4>Start date</h4>
-    <strong ng-bind="vm.dateTime(vm.tournament.startDate)"></strong>
-  </div>
+    <div>
+      <h4>Start date</h4>
+      <strong ng-bind="vm.dateTime(vm.tournament.startDate)"></strong>
+    </div>
 
-  <div>
-    <h4>
-      <span ng-if="!vm.hasStartDatePassed(vm.tournament.startDate)">Time until start</span>
-      <span ng-if="vm.hasStartDatePassed(vm.tournament.startDate)">Time since start</span>
-    </h4>
-    <strong ng-bind="vm.timeDifferenceFromNow(vm.tournament.startDate)"></strong>
-  </div>
+    <div>
+      <h4>
+        <span ng-if="!vm.hasStartDatePassed(vm.tournament.startDate)">Time until start</span>
+        <span ng-if="vm.hasStartDatePassed(vm.tournament.startDate)">Time since start</span>
+      </h4>
+      <strong ng-bind="vm.timeDifferenceFromNow(vm.tournament.startDate)"></strong>
+    </div>
 
-  <div>
-    <h4>Players per group</h4>
-    <strong ng-bind="vm.tournament.maxPlayersPerGroup"></strong>
-  </div>
+    <div>
+      <h4>Players per group</h4>
+      <strong ng-bind="vm.tournament.maxPlayersPerGroup"></strong>
+    </div>
+    <div>
+      <h4>Groups</h4>
+      <a ui-sref="groups({id: vm.tournament.$id})" href="">
+        <strong>Groups</strong>
+      </a>
+    </div>
   </div>
 
   <div>

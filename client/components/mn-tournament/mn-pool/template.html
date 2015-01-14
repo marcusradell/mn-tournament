@@ -3,14 +3,14 @@
     <h1>Tournament pool</h1>
   </div>
 
-  <div class="well">
+  <!--<div class="well">
     <h3>Remove all missing players</h3>
 
     <div>
       <p>Any players that have not checked in will be removed from the tournament.</p>
       <button ng-click="vm.removeAllMissingPlayers()" class="btn btn-warning">Remove missing players</button>
     </div>
-  </div>
+  </div>-->
 
   <div class="well">
     <h3>Add new player</h3>
@@ -55,16 +55,19 @@
       <tr ng-repeat="player in vm.pool">
         <td>
           <h4>
-            <i ng-if="player.checkedIn" class="fa fa-check text-success"></i>
+            <i ng-if="player.isCheckedIn" class="fa fa-check text-success"></i>
           </h4>
         </td>
         <td>
           <h4 ng-bind="player.$id"></h4>
         </td>
         <td>
-          <button ng-click="vm.setPlayerCheckInStatus(player.$id, !player.checkedIn)" class="btn" ng-class="player.checkedIn ? 'btn-warning' : 'btn-success'">
-            <span ng-if="!player.checkedIn">Check in</span>
-            <span ng-if="player.checkedIn">Undo check in</span>
+          <button
+            ng-click="vm.setPlayerIsCheckedIn(player.$id, !player.isCheckedIn)"
+            class="btn"
+            ng-class="player.isCheckedIn ? 'btn-warning' : 'btn-success'">
+              <span ng-if="!player.isCheckedIn">Check in</span>
+              <span ng-if="player.isCheckedIn">Undo check in</span>
           </button>
         </td>
         <td>
@@ -73,35 +76,5 @@
       </tr>
       </tbody>
     </table>
-<!--    <div ng-repeat="player in vm.pool">
-      <ul class="list-group">
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-xs-6">
-              <h4>
-              <span class="row">
-                <span class="col-xs-2">
-                  <i ng-if="player.checkedIn" class="fa fa-check text-success"></i>
-                </span>
-                <span class="col-xs-10">
-                  <span ng-bind="player.$id"></span>
-                </span>
-              </span>
-              </h4>
-            </div>
-            <div class="col-xs-6">
-              <div class="row">
-                <div class="col-xs-6">
-                  <button ng-click="vm.checkInPlayer(player.$id)" class="btn btn-success" ng-class="{disabled: player.checkedIn}" ng-disabled="player.checkedIn">Check in</button>
-                </div>
-                <div class="col-xs-6 text-right">
-                  <button ng-click="vm.removePlayer(player.$id)" class="btn btn-danger">Remove</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>-->
   </div>
 </div>
