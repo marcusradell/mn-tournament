@@ -1,16 +1,8 @@
 {
-  "name": "mn-tournament",
+  "name": "charmy-locket",
   "version": "0.1.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/marcusnielsen/tgoc.git"
-  },
   "author": "Marcus Nielsen <marcus.nielsen82@gmail.com> (http://github.com/marcusnielsen/)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/marcusnielsen/tgoc/issues"
-  },
-  "homepage": "https://github.com/marcusnielsen/tgoc",
   "dependencies": {
     "angular": "^1.3.6",
     "angular-ui-router": "^0.2.11",

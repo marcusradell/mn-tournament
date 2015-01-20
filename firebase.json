@@ -1,5 +1,5 @@
 {
-  "firebase": "mn-tournament",
+  "firebase": "charmy-locket",
   "public": "./client",
   "ignore": [
     "firebase.json",
