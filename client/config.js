@@ -24,11 +24,16 @@ module.exports = function ($stateProvider, $urlRouterProvider) {
       controller: require('./ui-views/groups/controller'),
       controllerAs: 'vm'
     })
-
     .state('group', {
       url: '/group/:mnTournamentId/:mnGroupId',
       template: fs.readFileSync(__dirname + '/ui-views/group/template.html'),
       controller: require('./ui-views/group/controller'),
+      controllerAs: 'vm'
+    })
+    .state('players', {
+      url: '/players/:id',
+      template: fs.readFileSync(__dirname + '/ui-views/players/template.html'),
+      controller: require('./ui-views/players/controller'),
       controllerAs: 'vm'
     })
 }

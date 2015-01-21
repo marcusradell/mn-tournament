@@ -1,14 +1,14 @@
 var _ = require('lodash')
 var Firebase = require('firebase')
 
-module.exports = function ($firebase, mnFirebaseConstants, mnPoolRepository) {
+module.exports = function ($firebase, mnFirebaseConstants, mnPlayersRepository) {
   var groupsSync = $firebase(new Firebase(mnFirebaseConstants.ROOT_REF).child(mnFirebaseConstants.GROUPS))
 
   var createGroupsArray = function (tournamentId) {
     return groupsSync.$set(tournamentId, false)
   }
 
-  var createGroup = function(groupsArray, poolArray, playerNames, tier, parentGroupId) {
+  var createGroup = function(groupsArray, playersArray, playerNames, tier, parentGroupId) {
     groupsArray.$inst().$push({
       players: playerNames,
       games: generateGames(playerNames),
@@ -16,7 +16,7 @@ module.exports = function ($firebase, mnFirebaseConstants, mnPoolRepository) {
       parentGroupId: parentGroupId || 0
     }).then(function onSuccess(ref) {
       // TODO: Continue promise-chain when setPlayers return a promise.
-      mnPoolRepository.setPlayersIsAssignedToGroup(poolArray, playerNames, true)
+      mnPlayersRepository.setPlayersIsAssignedToGroup(playersArray, playerNames, true)
     }, function onError(data) {
       alert(data)
     })
@@ -44,11 +44,17 @@ module.exports = function ($firebase, mnFirebaseConstants, mnPoolRepository) {
   }
 
   // TODO: Implement.
+  var updateScore = function(groupsArray, gameId) {
+
+  }
+
+  // TODO: Implement.
   var removeGroup = function (groupsArray, groupId) {
-    // mnPoolRepository.setPlayersIsAssignedToGroup(poolArray, playerNames, true)
+
   }
 
   var getGroupsArrayByTournamentId = function (tournamentId) {
+    debugger;
     return $firebase(groupsSync.$ref().child(tournamentId)).$asArray().$loaded()
   }
 

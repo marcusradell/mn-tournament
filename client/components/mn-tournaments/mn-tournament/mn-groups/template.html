@@ -1,4 +1,4 @@
-<div ng-if="vm.pool && vm.groups">
+<div ng-if="vm.players && vm.groups">
   <h2>Create a group</h2>
 
   <div class="row">
@@ -11,13 +11,13 @@
     <div class="col-xs-6">
       <h3>
         Checked in players
-        <span ng-bind="vm.availablePlayersInPool(vm.pool).length" class="badge"></span>
+        <span ng-bind="vm.availablePlayersInPlayers(vm.players).length" class="badge"></span>
       </h3>
 
       <div class="list-group">
         <a
           href=""
-          ng-repeat="player in vm.availablePlayersInPool(vm.pool)"
+          ng-repeat="player in vm.availablePlayers(vm.players)"
           ng-click="vm.selectPlayerName(player.$id)"
           class="list-group-item">
             <span ng-bind="player.$id" ></span>

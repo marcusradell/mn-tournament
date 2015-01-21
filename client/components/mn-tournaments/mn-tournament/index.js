@@ -17,7 +17,7 @@ var directiveFn = function () {
 }
 
 var dependencies = [
-  require('./mn-pool/index').name,
+  require('./mn-players/index').name,
   require('./mn-groups/index').name
 ]
 

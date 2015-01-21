@@ -1,8 +1,4 @@
-<div ng-if="vm.pool">
-  <div class="page-header">
-    <h1>Tournament pool</h1>
-  </div>
-
+<div ng-if="vm.players">
   <div class="well">
     <h3>Add new player</h3>
 
@@ -30,7 +26,7 @@
   <div>
     <h3>
       Registered players
-      <span ng-bind="vm.pool.length" class="badge"></span>
+      <span ng-bind="vm.players.length" class="badge"></span>
     </h3>
 
     <table class="table table-striped">
@@ -43,7 +39,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="player in vm.pool">
+      <tr ng-repeat="player in vm.players">
         <td>
           <h4>
             <i ng-if="player.isCheckedIn" class="fa fa-check text-success"></i>

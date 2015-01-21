@@ -1,10 +1,10 @@
 var _ = require('lodash')
 
-module.exports = function (mnGroupsRepository, mnPoolRepository) {
+module.exports = function (mnGroupsRepository, mnPlayersRepository) {
   var vm = this
 
   var createGroup = function (playerNames) {
-    mnGroupsRepository.createGroup(vm.groups, vm.pool, playerNames)
+    mnGroupsRepository.createGroup(vm.groups, vm.players, playerNames)
 
     clearSelectedPlayerNames()
   }
@@ -16,7 +16,7 @@ module.exports = function (mnGroupsRepository, mnPoolRepository) {
   }
 
   var setPlayerIsAssignedToGroup = function (playerName, isAssignedToGroup) {
-    mnPoolRepository.setPlayerIsAssignedToGroup(vm.mnTournamentId, playerName, isAssignedToGroup)
+    mnPlayersRepository.setPlayerIsAssignedToGroup(vm.mnTournamentId, playerName, isAssignedToGroup)
   }
 
   var selectPlayerName = function (playerName) {
@@ -44,17 +44,17 @@ module.exports = function (mnGroupsRepository, mnPoolRepository) {
     return player.isCheckedIn && !player.isAssignedToGroup
   }
 
-  var availablePlayersInPool = function (pool) {
-    return _.where(pool, function (player) {
+  var availablePlayers = function (players) {
+    return _.where(players, function (player) {
       return isPlayerAvailable(player)
     })
   }
 
   vm.groups = null
-  vm.pool = null
+  vm.players = null
   vm.selectedPlayerNames = []
   vm.isPlayerAvailable = isPlayerAvailable
-  vm.availablePlayersInPool = availablePlayersInPool
+  vm.availablePlayers = availablePlayers
   vm.selectPlayerName = selectPlayerName
   vm.unselectPlayerName = unselectPlayerName
   vm.createGroup = createGroup
@@ -67,8 +67,8 @@ module.exports = function (mnGroupsRepository, mnPoolRepository) {
       alert(data)
     })
 
-    mnPoolRepository.getPoolById(vm.mnTournamentId).then(function onSuccess(data) {
-      vm.pool = data
+    mnPlayersRepository.getPlayersById(vm.mnTournamentId).then(function onSuccess(data) {
+      vm.players = data
     }, function onError(data) {
       alert(data)
     })

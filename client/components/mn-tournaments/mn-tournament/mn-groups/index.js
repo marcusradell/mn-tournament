@@ -16,7 +16,7 @@ var directiveFn = function () {
   }
 }
 
-var dependencies = [require('../mn-pool/index').name]
+var dependencies = [require('../mn-players').name]
 
 module.exports = angular.module(moduleName, dependencies)
   .controller(controllerName, require('./controller'))

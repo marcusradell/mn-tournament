@@ -1,6 +1,6 @@
 var fs = require('fs')
 
-var moduleName = 'mnPool'
+var moduleName = 'mnPlayers'
 var controllerName = moduleName + 'Controller'
 var template = fs.readFileSync(__dirname + '/template.html')
 
