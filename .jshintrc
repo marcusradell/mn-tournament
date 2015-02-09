@@ -1,12 +1,12 @@
 {
   "maxerr": 10,
-  "quotmark": "single",
+  "quotmark": "double",
   "camelcase": true,
   "curly": true,   // Require {} for every new block or scope.
   "eqeqeq": true,   // Require triple equals i.e. `===`.
   "node": true,
   "browser": true,
-  "asi": true,
+  "asi": false,
   "globals": {
     "angular": false,
     "module": false,

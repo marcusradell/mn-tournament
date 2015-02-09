@@ -1,3 +1,3 @@
-var gulp = require('gulp')
+var gulp = require("gulp");
 
-require('mn-gulp')(gulp)
+require("mn-gulp")(gulp);
