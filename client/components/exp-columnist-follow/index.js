@@ -1,11 +1,8 @@
 var angular = require("angular");
 var fs = require("fs");
 
-var moduleName = "expTopNav";
+var moduleName = "expColumnistFollow";
 var moduleDependencies = [
-  require("./exp-top-nav-menu").name,
-  require("./exp-top-nav-login").name,
-  require("./exp-top-nav-header").name,
 ];
 
 var template = fs.readFileSync(__dirname + "/view.html", "utf8");
@@ -16,7 +13,9 @@ var directiveFn = function () {
     controllerAs: "vm",
     bindToController: true,
     template: template,
-    scope: {}
+    scope: {
+      columnistId: "="
+    }
   };
 };
 

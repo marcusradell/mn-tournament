@@ -1,11 +1,10 @@
 var angular = require("angular");
 var fs = require("fs");
 
-var moduleName = "expTopNav";
+var moduleName = "expColumnists";
 var moduleDependencies = [
-  require("./exp-top-nav-menu").name,
-  require("./exp-top-nav-login").name,
-  require("./exp-top-nav-header").name,
+  require("../exp-panel").name,
+  require("../exp-columnist-follow").name
 ];
 
 var template = fs.readFileSync(__dirname + "/view.html", "utf8");
@@ -21,4 +20,5 @@ var directiveFn = function () {
 };
 
 module.exports = angular.module(moduleName, moduleDependencies)
-  .directive(moduleName, directiveFn);
+  .directive(moduleName, directiveFn)
+  .factory(moduleName + "Repository", require("./repository"));

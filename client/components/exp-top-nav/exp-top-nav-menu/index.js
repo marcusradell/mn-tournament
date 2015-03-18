@@ -1,11 +1,9 @@
 var angular = require("angular");
 var fs = require("fs");
 
-var moduleName = "expTopNav";
+var moduleName = "expTopNavMenu";
 var moduleDependencies = [
-  require("./exp-top-nav-menu").name,
-  require("./exp-top-nav-login").name,
-  require("./exp-top-nav-header").name,
+  "ui.router"
 ];
 
 var template = fs.readFileSync(__dirname + "/view.html", "utf8");

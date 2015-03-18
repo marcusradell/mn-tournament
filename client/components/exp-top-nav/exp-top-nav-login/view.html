@@ -1,0 +1,5 @@
+<ul class="nav navbar-nav navbar-right">
+  <li ng-repeat="link in vm.links" ui-sref-active="active">
+    <a ui-sref="{{link.state}}" ng-bind="link.name"></a>
+  </li>
+</ul>

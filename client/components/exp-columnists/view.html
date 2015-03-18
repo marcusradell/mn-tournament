@@ -1,0 +1,7 @@
+<exp-panel title="Alla skribenter">
+  <li ng-repeat="columnist in vm.columnists" class="columnists-item">
+    <img ng-src="{{columnist.imgUrl}}" alt="Krönikör" class="columnists-item__image"/>
+    <h4 ng-bind="columnist.name" class="columnists-item__title"></h4>
+    <exp-columnist-follow columnist-id="columnist.id"></exp-columnist-follow>
+  </li>
+</exp-panel>

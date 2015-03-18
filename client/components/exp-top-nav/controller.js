@@ -1,5 +1,9 @@
 module.exports = function() {
   var vm = this;
 
-  vm.test = "TODO: Implement the controller.";
+  var links = [
+    {name: "Start", state: "start"}
+  ];
+
+  vm.links = links;
 };

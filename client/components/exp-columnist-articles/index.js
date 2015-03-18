@@ -1,11 +1,8 @@
 var angular = require("angular");
 var fs = require("fs");
 
-var moduleName = "expTopNav";
+var moduleName = "expColumnistArticles";
 var moduleDependencies = [
-  require("./exp-top-nav-menu").name,
-  require("./exp-top-nav-login").name,
-  require("./exp-top-nav-header").name,
 ];
 
 var template = fs.readFileSync(__dirname + "/view.html", "utf8");

@@ -1,0 +1,6 @@
+<exp-panel title="Alla artiklar">
+  <li ng-repeat="article in vm.columnistArticles">
+    <a ng-href="{{article.articleUrl}}" ng-bind="article.header"></a>
+    <span ng-bind="vm.getArticleDate(article.date)"></span>
+  </li>
+</exp-panel>
