@@ -4,11 +4,42 @@ var Firebase = require('firebase')
 module.exports = function ($firebase, mnFirebaseConstants, mnPlayersRepository) {
   var groupsSync = $firebase(new Firebase(mnFirebaseConstants.ROOT_REF).child(mnFirebaseConstants.GROUPS))
 
-  var createGroupsArray = function (tournamentId) {
-    return groupsSync.$set(tournamentId, false)
+  var generateGroups = function (tournamentId, playersArray, maxPlayersPerGroup) {
+    var checkedInPlayers = _.where(playersArray, function isCheckedIn(player) {
+      return player.isCheckedIn
+    })
+
+    var groupsData = []
+    var playerNames = _.shuffle(_.pluck(playersArray,'$id'))
+    var groupsCount = checkedInPlayers.length / maxPlayersPerGroup
+
+    for(var groupIndex = 0; groupIndex < groupsCount; groupIndex++) {
+      var groupPlayerNames = []
+
+      for(var playerIndex = groupIndex; playerIndex < playerNames.length; playerIndex += groupsCount) {
+        groupPlayerNames.push(playerNames[playerIndex])
+      }
+
+      groupsData.push({
+        players: groupPlayerNames,
+        games: generateGames(groupPlayerNames)
+      })
+    }
+    debugger;
+    groupsSync.$set(tournamentId, false).then(function onCreateGroupsArraySuccess() {
+      for(var i = 0; i < groupsData.length; i++) {
+        getGroupsArrayByTournamentId(tournamentId).then(function onGetGroupsSuccess(data) {
+          data.$push(groupsData[i])
+        }, function onGetGroupsError(data) {
+          alert(data)
+        })
+      }
+    }, function onCreateGroupsArrayError(data) {
+      alert(data)
+    })
   }
 
-  var createGroup = function(groupsArray, playersArray, playerNames, tier, parentGroupId) {
+  /*var createGroup = function(groupsArray, playersArray, playerNames, tier, parentGroupId) {
     groupsArray.$inst().$push({
       players: playerNames,
       games: generateGames(playerNames),
@@ -20,7 +51,7 @@ module.exports = function ($firebase, mnFirebaseConstants, mnPlayersRepository) 
     }, function onError(data) {
       alert(data)
     })
-  }
+  }*/
 
   var generateGames = function (playerNames) {
     if(playerNames.length < 2) {
@@ -40,7 +71,7 @@ module.exports = function ($firebase, mnFirebaseConstants, mnPlayersRepository) 
       }
     }
 
-    return games
+    return _.shuffle(games)
   }
 
   // TODO: Implement.
@@ -48,20 +79,12 @@ module.exports = function ($firebase, mnFirebaseConstants, mnPlayersRepository) 
 
   }
 
-  // TODO: Implement.
-  var removeGroup = function (groupsArray, groupId) {
-
-  }
-
   var getGroupsArrayByTournamentId = function (tournamentId) {
-    debugger;
     return $firebase(groupsSync.$ref().child(tournamentId)).$asArray().$loaded()
   }
 
   return {
-    createGroup: createGroup,
-    removeGroup: removeGroup,
-    createGroupsArray: createGroupsArray,
+    generateGroups: generateGroups,
     getGroupsArrayByTournamentId: getGroupsArrayByTournamentId
   }
 }

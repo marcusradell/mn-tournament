@@ -1,45 +1,9 @@
-<div ng-if="vm.players && vm.groups">
-  <h2>Create a group</h2>
+<div ng-if="vm.groups">
+  <h2>Generate groups</h2>
 
   <div class="row">
     <div class="col-xs-offset-6 col-xs-6">
-      <button class="btn btn-success" ng-click="vm.createGroup(vm.selectedPlayerNames)">Create group</button>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-6">
-      <h3>
-        Checked in players
-        <span ng-bind="vm.availablePlayersInPlayers(vm.players).length" class="badge"></span>
-      </h3>
-
-      <div class="list-group">
-        <a
-          href=""
-          ng-repeat="player in vm.availablePlayers(vm.players)"
-          ng-click="vm.selectPlayerName(player.$id)"
-          class="list-group-item">
-            <span ng-bind="player.$id" ></span>
-        </a>
-      </div>
-    </div>
-    <div class="col-xs-6">
-
-      <h3>
-        Selected players
-        <span ng-bind="vm.selectedPlayerNames.length" class="badge"></span>
-      </h3>
-
-      <div class="list-group">
-        <a
-          href=""
-          ng-repeat="playerName in vm.selectedPlayerNames"
-          ng-click="vm.unselectPlayerName(playerName)"
-          class="list-group-item">
-          <span ng-bind="playerName"></span>
-        </a>
-      </div>
+      <button class="btn btn-success" ng-click="vm.generateGroups()">Generate groups</button>
     </div>
   </div>
 

@@ -42,7 +42,7 @@ module.exports = function ($firebase, $q, mnFirebaseConstants) {
   }
 
   var getPlayersById = function (playersId) {
-    return $firebase(playerssSync.$ref().child(playersId)).$asArray().$loaded()
+    return $firebase(playersSync.$ref().child(playersId)).$asArray().$loaded()
   }
 
   var isNameUnique = function (playersArray, playerName) {
